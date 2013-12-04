@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+db_input high libgpio1/gpioconfig || true
+db_go || true
+
+# Check their answer.
+db_get libgpio1/gpioconfig
+if [ "$RET" = "AT91" ]; then
+	cp /usr/share/doc/libgpio/examples/at91.cfg /etc/gpio.cfg
+fi

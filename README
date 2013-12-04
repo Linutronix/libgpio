@@ -1,0 +1,13 @@
+libgpio
+=======
+
+libgpio can be used to ease the access of GPIOs via Linux / sysfs.
+
+build
+^^^^^
+./autogen.sh
+./configure && make && make install
+
+also debian packages can be built:
+./autogen.sh
+dpkg-buildpackage

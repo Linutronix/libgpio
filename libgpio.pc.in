@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: gpio
+Description: controls gpio pins
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lgpio -lconfig
+Cflags: -I${includedir}
