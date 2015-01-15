@@ -375,6 +375,7 @@ int gpio_set_value (gpio_pin *pin, gpio_value value)
 			pin->no, ret);
 
 		close (pin->fd);
+		pin->fd = -1;
 		return ret;
 	}
 
@@ -413,6 +414,7 @@ int gpio_get_value (gpio_pin *pin, gpio_value *value)
 			pin->no, ret);
 
 		close (pin->fd);
+		pin->fd = -1;
 		return ret;
 	}
 
@@ -425,6 +427,7 @@ int gpio_get_value (gpio_pin *pin, gpio_value *value)
 			pin->no, ret);
 
 		close (pin->fd);
+		pin->fd = -1;
 		return ret;
 	}
 
@@ -453,15 +456,15 @@ int gpio_open (gpio_pin *pin, unsigned int no)
 
 	debug ("%s: %d\n", __func__, no);
 
+	pin->no = no;
+	pin->fd = -1;
+
 	ret = export (pin);
 
 	if (ret < 0 ) {
 		pin->valid = GPIO_INVALID;
 		return ret;
 	}
-
-	pin->no = no;
-	pin->fd = -1;
 
 	ret = get_direction (pin);
 	if (ret)
@@ -567,11 +570,10 @@ int gpio_irq_timed_wait (gpio_pin *pin, gpio_value *value, int timeout_ms)
 	{
 		ret = -errno;
 		close (pin->fd);
+		pin->fd = -1;
 		fprintf (stderr, "wait for irq failed: %d\n", ret);
 		return ret;
 	}
-
-	close (pin->fd);
 
 	/* timeout */
 	if (ret == 0)
