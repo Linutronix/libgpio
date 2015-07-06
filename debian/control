@@ -1,7 +1,7 @@
 Source: libgpio
 Priority: extra
 Maintainer: Manuel Traut <manut@linutronix.de>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, libconfig-dev, git
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libconfig-dev, git, dh-autoreconf
 Standards-Version: 3.9.2
 Section: libs
 
