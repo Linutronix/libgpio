@@ -124,6 +124,11 @@ static int get_direction (gpio_pin *pin)
 	}
 
 	len = read (fd, &dir, 1);
+	if (len != 1) {
+		ret = errno;
+		fprintf (stderr, "read direction from %s failed: %d\n", c, ret);
+		return -ret;
+	}
 
 	switch (dir)
 	{
@@ -195,8 +200,6 @@ static int direction (gpio_pin *pin, char *dir)
 		return ret;
 	}
 
-	ret = 0;
-
 	fd = open (c, O_RDWR);
 
 	if (fd < 0)
@@ -238,8 +241,6 @@ static int set_irq (gpio_pin *pin, gpio_irq_mode m)
 		fprintf (stderr, "cannot create edge sysfs string for gpio %d\n", pin->no);
 		return ret;
 	}
-
-	ret = 0;
 
 	fd = open (c, O_RDWR);
 
