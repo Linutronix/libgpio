@@ -550,10 +550,6 @@ int gpio_irq_timed_wait (gpio_pin *pin, gpio_value *value, int timeout_ms)
 		return -ENOMEM;
 	}
 
-	if (pin->fd == -1) {
-		return -EINVAL;
-	}
-
 	if (pin->fd == -1)
 		ret = open_value_fd (pin);
 
