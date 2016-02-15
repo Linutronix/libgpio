@@ -602,7 +602,11 @@ struct gpio_irq * gpio_irq_init(int max)
 	if (ret) {
 		ret->maxfd = max;
 		ret->count = 0;
+		ret->nfds = 0;
+		ret->ret = 0;
+		ret->thread = 0;
 		ret->gpt = malloc(max * sizeof(gpio_pin *));
+		ret->irqdesc = NULL;
 	}
 	return ret;
 }
@@ -611,7 +615,7 @@ int gpio_irq_add(struct gpio_irq *gi, gpio_pin * gp)
 {
 	if (!gp)
 		return -EINVAL;
-	if (gi->count == gi->maxfd - 1)
+	if (gi->count == gi->maxfd)
 		return -ENOMEM;
 	gi->gpt[gi->count] = gp;
 	gi->count++;
@@ -664,7 +668,7 @@ static void * gpio_irq_loop (void * v)
 			static int call = 0;
 			int idx;
 			
-			printf("Polling\n");
+			debug("Polling(%p,%d,-1)\n", gi->irqdesc, gi->nfds);
 			ret = poll (gi->irqdesc, gi->nfds, -1);
 			if (ret < 0) {
 				printf("Poll failed with error %d\n", errno);
@@ -682,7 +686,7 @@ static void * gpio_irq_loop (void * v)
 				}
 				call++;
 			} else {
-				printf("%d GPIO value changed\n", ret);
+				debug("%d GPIO value changed\n", ret);
 				for (idx = 0; idx < gi->count; idx++) {
 					if (gi->irqdesc[idx].revents != 0) {
 						process_irq_event(gi, idx);
