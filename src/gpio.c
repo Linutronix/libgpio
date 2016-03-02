@@ -318,7 +318,7 @@ int gpio_in (gpio_pin *pin)
 	ret = direction (pin, "in\0");
 
 	if (!ret)
-		pin->direction = GPIO_OUT;
+		pin->direction = GPIO_IN;
 
 	return ret;
 }
