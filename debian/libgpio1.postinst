@@ -1,5 +1,8 @@
 #!/bin/sh
 set -e
+
+#DEBHELPER#
+
 . /usr/share/debconf/confmodule
 db_input high libgpio1/gpioconfig || true
 db_go || true

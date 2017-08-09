@@ -1,5 +1,5 @@
 Template: libgpio1/gpioconfig
 Type: Select
 Choices: AT91, none
-Description: GPIO Mapping:
+_Description: GPIO Mapping:
  Please choose the mapping according to your system.
