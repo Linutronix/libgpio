@@ -536,6 +536,9 @@ int gpio_enable_irq (gpio_pin *pin, gpio_irq_mode m)
 
 int gpio_get_fd (gpio_pin *pin)
 {
+	if (pin->fd == -1)
+		open_value_fd (pin);
+
 	return pin->fd;
 }
 
