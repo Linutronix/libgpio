@@ -18,6 +18,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 #define SYSFS     "/sys/class/gpio/"
 #define EXPORT    SYSFS"export"
@@ -184,6 +186,11 @@ static int open_value_fd (gpio_pin *pin)
 	}
 
 	return ret;
+}
+
+/* TODO : remove followings */
+int __open_value_fd (gpio_pin *pin) {
+	return open_value_fd(pin);
 }
 
 static int direction (gpio_pin *pin, char *dir)
@@ -585,4 +592,153 @@ int gpio_irq_timed_wait (gpio_pin *pin, gpio_value *value, int timeout_ms)
 int gpio_irq_wait (gpio_pin *pin, gpio_value *value)
 {
 	return gpio_irq_timed_wait (pin, value, -1);
+}
+
+struct gpio_irq * gpio_irq_init(int max)
+{
+	struct gpio_irq * ret;
+	
+	if (max <= 0)
+		return NULL;
+	
+	ret = malloc(sizeof(struct gpio_irq));
+	if (ret) {
+		ret->maxfd = max;
+		ret->count = 0;
+		ret->nfds = 0;
+		ret->ret = 0;
+		ret->thread = 0;
+		ret->gpt = malloc(max * sizeof(gpio_pin *));
+		ret->irqdesc = NULL;
+	}
+	return ret;
+}
+
+int gpio_irq_add(struct gpio_irq *gi, gpio_pin * gp)
+{
+	if (!gp)
+		return -EINVAL;
+	if (gi->count == gi->maxfd)
+		return -ENOMEM;
+	gi->gpt[gi->count] = gp;
+	gi->count++;
+	return 0;
+}
+
+int gpio_enable_irq_callback (gpio_pin *pin, gpio_irq_mode m, 
+		     int (*cb)(struct _gpio_pin *), void* d)
+{
+	int ret = gpio_enable_irq(pin, m);
+	if (ret) {
+		fprintf (stderr, "enable_irq failed\n");
+	} else {
+		pin->irq_cb = cb;
+		pin->irq_data = d;
+	}
+	return ret;
+}
+
+static void process_irq_event(struct gpio_irq * gi, int idx)
+{
+	char value = 0;
+	gi->irqdesc[idx].events = POLLPRI | POLLERR;
+	gi->irqdesc[idx].revents = 0;
+	lseek(gi->irqdesc[idx].fd, 0, SEEK_SET);
+	if (read(gi->irqdesc[idx].fd, &value, 1) <= 0) {
+		perror("process_irq : read failed");
+	} else {
+		if (gi->gpt[idx]->irq_cb)
+			gi->gpt[idx]->irq_cb(gi->gpt[idx]);
+		else
+			printf("Gpio %d switch but no callback available (value: %c)\n",
+				gi->gpt[idx]->no, value);
+	}
+}
+
+static void * gpio_irq_loop (void * v)
+{
+	int ret = 0;
+	struct gpio_irq * gi = v;
+	
+	printf("gpio_irq_loop\n");
+	
+	if (!gi || !gi->irqdesc)
+		gi->ret = -EINVAL;
+	else {
+		gi->ret = 0;
+
+		while (gi->ret == 0) {
+			static int call = 0;
+			int idx;
+			
+			debug("Polling(%p,%d,-1)\n", gi->irqdesc, gi->nfds);
+			ret = poll (gi->irqdesc, gi->nfds, -1);
+			if (ret < 0) {
+				printf("Poll failed with error %d\n", errno);
+			} else if (ret == 0) {
+				printf("Poll timeout\n");
+			} else if (call == 0) { 
+				/*
+				 when starting poll an irq occur with no reason,
+				 this case flush it. Maybe this state is due to pullup
+				*/
+				for (idx = 0; idx < gi->count; idx++) {
+					char value;
+					// re-init poll
+					read(gi->irqdesc[idx].fd, &value, 1);
+				}
+				call++;
+			} else {
+				debug("%d GPIO value changed\n", ret);
+				for (idx = 0; idx < gi->count; idx++) {
+					if (gi->irqdesc[idx].revents != 0) {
+						process_irq_event(gi, idx);
+					}
+				}
+			}
+		}
+	}
+	return v;
+}
+
+int gpio_irq_start_loop(struct gpio_irq * gi)
+{
+	int idx, ret;
+
+	if (!gi || gi->count <= 0)
+		return -EINVAL;
+
+	gi->irqdesc = malloc(gi->count * sizeof(struct pollfd));
+	gi->ret = 0;
+		
+	for (idx = 0; idx < gi->count; idx++) {
+		if (gi->gpt[idx]->valid != GPIO_VALID)
+			return -EIO;
+
+		if (gi->gpt[idx]->fd == -1)
+			ret = __open_value_fd (gi->gpt[idx]);
+		if (ret) {
+			fprintf (stderr, "WARNING: can't access gpio %d\n",
+				 gi->gpt[idx]->no);
+			return -EIO;
+		}
+		/* initialise fd entry */ 
+		gi->irqdesc[idx].fd = gi->gpt[idx]->fd;
+		gi->irqdesc[idx].events = POLLPRI | POLLERR;
+		gi->irqdesc[idx].revents = 0;
+		printf("Gpio %d added\n",gi->gpt[idx]->no);
+		gi->nfds++;
+	}
+	return pthread_create(&gi->thread, NULL, gpio_irq_loop, gi);
+}
+
+void gpio_irq_destroy(struct gpio_irq * gi)
+{
+	if (gi) {
+		if (gi->gpt)
+			free(gi->gpt);
+		if (gi->irqdesc)
+			free(gi->irqdesc);
+		free(gi);
+	}
 }

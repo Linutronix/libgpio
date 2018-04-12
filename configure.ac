@@ -24,7 +24,7 @@ PKG_CHECK_MODULES([LIBCONFIG], [libconfig >= 1.4],,
 )
 
 # Checks for header files.
-AC_CHECK_HEADERS([fcntl.h stdio.h stdint.h stdlib.h string.h sys/ioctl.h unistd.h])
+AC_CHECK_HEADERS([fcntl.h stdio.h stdint.h stdlib.h string.h sys/ioctl.h unistd.h pthread.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_INT16_T

@@ -11,3 +11,13 @@ build
 also debian packages can be built:
 ./autogen.sh
 dpkg-buildpackage
+
+QUICK build:
+
+edit Makefile:
+
+all:
+	${CC} -g -o gpioirq src/config.c src/gpio.c examples/testirq.c -I./include ${CFLAGS} ${LDFLAGS} `pkg-config --cflags --libs libconfig` -lpthread
+	
+clean:
+	rm -f gpiotest

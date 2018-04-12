@@ -13,6 +13,8 @@ extern "C" {
 #endif
 
 #include <libconfig.h>
+#include <pthread.h>
+#include <poll.h>
 
 typedef enum _gpio_direction {
 	GPIO_IN,
@@ -42,7 +44,20 @@ typedef struct _gpio_pin {
 	gpio_irq_mode irq_mode;
 	int fd;
 	gpio_status valid;
+	int (*irq_cb)(struct _gpio_pin *);
+	void * irq_data;
 } gpio_pin;
+
+struct gpio_irq{
+	int maxfd;
+	int count;
+	gpio_pin ** gpt;
+	int ret;
+	pthread_t thread;
+	nfds_t nfds;
+	struct pollfd *irqdesc;
+	/* TODO : Add mutex for parallel use*/
+};
 
 static config_t cfg = {
 	.root = NULL,
@@ -65,6 +80,13 @@ int gpio_get_value (gpio_pin *pin, gpio_value *value);
 int gpio_enable_irq (gpio_pin *pin, gpio_irq_mode m);
 int gpio_irq_wait (gpio_pin *pin, gpio_value *value);
 int gpio_irq_timed_wait (gpio_pin *pin, gpio_value *value, int timeout_ms);
+
+struct gpio_irq * gpio_irq_init(int max);
+int gpio_irq_add(struct gpio_irq *gi, gpio_pin * gp);
+int gpio_enable_irq_callback (gpio_pin *pin, gpio_irq_mode m, 
+		     int (*cb)(struct _gpio_pin *), void* d);
+int gpio_irq_start_loop(struct gpio_irq * gi);
+void gpio_irq_destroy(struct gpio_irq * gi);
 
 int gpio_get_fd (gpio_pin *pin);
 
