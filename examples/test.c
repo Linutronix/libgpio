@@ -1,6 +1,6 @@
 #include <gpio.h>
 
-int main (int argc, char **argv)
+int main (int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
 	gpio_pin pin;
 	int ret = gpio_open_by_name (&pin, "test");
