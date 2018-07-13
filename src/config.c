@@ -6,6 +6,10 @@
 #include <libconfig.h>
 #include <gpio.h>
 
+static config_t cfg = {
+	.root = NULL,
+};
+
 static int init_cfg (void)
 {
 	int ret = CONFIG_TRUE;

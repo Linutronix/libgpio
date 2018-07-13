@@ -44,10 +44,6 @@ typedef struct _gpio_pin {
 	gpio_status valid;
 } gpio_pin;
 
-static config_t cfg = {
-	.root = NULL,
-};
-
 int gpio_open (gpio_pin *pin, unsigned int no);
 int gpio_open_by_name (gpio_pin *pin, const char *name);
 int gpio_open_dir (gpio_pin *pin, unsigned int no, gpio_direction dir);
