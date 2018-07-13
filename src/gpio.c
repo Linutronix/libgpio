@@ -309,6 +309,9 @@ int gpio_out (gpio_pin *pin)
 
 	debug ("%s: %d\n", __func__, pin->no);
 
+	if (!pin)
+		return -EINVAL;
+
 	ret = direction (pin, "out\0");
 
 	if (!ret)
@@ -322,6 +325,9 @@ int gpio_in (gpio_pin *pin)
 	int ret = 0;
 
 	debug ("%s: %d\n", __func__, pin->no);
+
+	if (!pin)
+		return -EINVAL;
 
 	ret = direction (pin, "in\0");
 
@@ -337,6 +343,9 @@ int gpio_set_value (gpio_pin *pin, gpio_value value)
 	char c;
 
 	debug ("%s: %d = %d\n", __func__, pin->no, value);
+
+	if (!pin)
+		return -EINVAL;
 
 	if (pin->direction != GPIO_OUT)
 	{
@@ -397,6 +406,9 @@ int gpio_get_value (gpio_pin *pin, gpio_value *value)
 	char c;
 
 	debug ("%s: %d\n", __func__, pin->no);
+
+	if (!pin || !value)
+		return -EINVAL;
 
 	if (pin->valid != GPIO_VALID)
 	{
@@ -465,6 +477,9 @@ int gpio_open (gpio_pin *pin, unsigned int no)
 
 	debug ("%s: %d\n", __func__, no);
 
+	if (!pin)
+		return -EINVAL;
+
 	pin->no = no;
 	pin->fd = -1;
 
@@ -489,6 +504,9 @@ int gpio_open_dir (gpio_pin *pin, unsigned int no, gpio_direction dir)
 	int ret = 0;
 
 	debug ("%s: %d - %d\n", __func__, no, dir);
+
+	if (!pin)
+		return -EINVAL;
 
 	ret = gpio_open (pin, no);
 
@@ -517,6 +535,9 @@ int gpio_close (gpio_pin *pin)
 
 	debug ("%s: %d\n", __func__, pin->no);
 
+	if (!pin)
+		return -EINVAL;
+
 	if (pin->fd != -1)
 	{
 		close (pin->fd);
@@ -532,6 +553,9 @@ int gpio_enable_irq (gpio_pin *pin, gpio_irq_mode m)
 {
 	debug ("%s: %d\n", __func__, pin->no);
 
+	if (!pin)
+		return -EINVAL;
+
 	/* outputs can't be polled */
 	if (pin->direction == GPIO_OUT)
 		return -1;
@@ -544,6 +568,9 @@ int gpio_enable_irq (gpio_pin *pin, gpio_irq_mode m)
 
 int gpio_get_fd (gpio_pin *pin)
 {
+	if (!pin)
+		return -EINVAL;
+
 	if (pin->fd == -1)
 		open_value_fd (pin);
 
@@ -556,6 +583,9 @@ int gpio_irq_timed_wait (gpio_pin *pin, gpio_value *value, int timeout_ms)
 	struct pollfd irqdesc = {
 		.events = POLLPRI | POLLERR ,
 	};
+
+	if (!pin || !value)
+		return -EINVAL;
 
 	if (pin->valid != GPIO_VALID) {
 		return -ENOMEM;
