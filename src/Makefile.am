@@ -9,5 +9,5 @@ lib_LTLIBRARIES = libgpio.la
 #    release, then set age to 0.
 libgpio_la_LDFLAGS = -release @PACKAGE_VERSION@ -version-info 3:0:0 -lconfig
 libgpio_la_SOURCES = gpio.c config.c
-libgpio_la_CFLAGS = -I$(top_srcdir)/include \
+libgpio_la_CFLAGS = -Wall -Wextra -Werror -I$(top_srcdir)/include \
 	-DCFG_FILE=\"$(sysconfdir)/gpio.cfg\"
