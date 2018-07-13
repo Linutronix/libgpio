@@ -214,7 +214,13 @@ static int direction (gpio_pin *pin, char *dir)
 
 	ret = write (fd, dir, strnlen (dir, 3));
 
-	if (ret != strnlen (dir, 3))
+	/*
+	 * strnlen (dir, 3) <= 3 < SSIZE_MAX
+	 * cast to ssize_t to avoid a annoying warning from the compiler:
+	 * gpio.c:217:10: warning: comparison between signed and unsigned
+	 * integer expressions [-Wsign-compare]
+	 */
+	if (ret != (ssize_t) strnlen (dir, 3))
 	{
 		ret = -errno;
 		fprintf (stderr, "set direction: %s on gpio %d failed: %d\n",
