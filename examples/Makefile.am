@@ -1,5 +1,5 @@
 bin_PROGRAMS = testpin
-testpin_SOURCES = test.c
+testpin_SOURCES = testpin.c
 testpin_CFLAGS = -Wall -Wextra -Werror \
 	-I${top_srcdir}/include @LIBCONFIG_CFLAGS@
 testpin_LDFLAGS = ${top_builddir}/src/libgpio.la @LIBCONFIG_LIBS@
