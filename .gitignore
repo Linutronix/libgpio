@@ -1,3 +1,8 @@
+# wildcard rules
+.*
+!.gitignore
+*~
+\#*#
 *.log
 *.debhelper
 *.substvars
@@ -5,23 +10,23 @@
 *.o
 *.la
 *.lo
-.libs
+config.*
+
+# directories
+autom4te.cache/
+m4/
+
+# specific rules
 INSTALL
 aclocal.m4
 compile
-config.*
 configure
 depcomp
+examples/testpin
 install-sh
+libgpio.pc
+libtool
 ltmain.sh
-m4/
 missing
 Makefile
 stamp-h1
-debian/files
-debian/libgpio-dev/
-debian/libgpio1
-debian/tmp
-examples/testpin
-libgpio.pc
-libtool
