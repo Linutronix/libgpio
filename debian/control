@@ -13,7 +13,6 @@ Description: development headers for libgpio
  libgpio is used to control gpio pins that can be exported via sysfs
 
 Package: libgpio1
-Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: GPIO helper library
