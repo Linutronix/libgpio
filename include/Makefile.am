@@ -1,1 +1,5 @@
 include_HEADERS = gpio.h
+
+DISTCLEANFILES = *~
+
+MAINTAINERCLEANFILES = Makefile.in

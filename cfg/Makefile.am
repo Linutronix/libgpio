@@ -5,3 +5,7 @@ gpioconfdir = $(sysconfdir)/
 gpioconf_DATA = gpio.cfg
 
 EXTRA_DIST = at91.cfg gpio.cfg
+
+DISTCLEANFILES = *~
+
+MAINTAINERCLEANFILES = Makefile.in

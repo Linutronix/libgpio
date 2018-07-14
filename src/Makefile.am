@@ -11,3 +11,7 @@ libgpio_la_LDFLAGS = -release @PACKAGE_VERSION@ -version-info 3:0:0 -lconfig
 libgpio_la_SOURCES = gpio.c config.c
 libgpio_la_CFLAGS = -Wall -Wextra -Werror -I$(top_srcdir)/include \
 	-DCFG_FILE=\"$(sysconfdir)/gpio.cfg\"
+
+DISTCLEANFILES = *~
+
+MAINTAINERCLEANFILES = Makefile.in

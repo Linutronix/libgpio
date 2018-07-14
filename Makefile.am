@@ -8,3 +8,9 @@ DEBIAN_FILES = debian/changelog debian/compat debian/control \
 	debian/rules debian/source/format
 
 EXTRA_DIST = libgpio.pc.in $(DEBIAN_FILES)
+
+DISTCLEANFILES = *~
+
+MAINTAINERCLEANFILES = INSTALL Makefile.in aclocal.m4 cfg/Makefile.in \
+	compile config.guess config.h.in config.sub configure depcomp \
+	install-sh ltmain.sh m4/* missing
