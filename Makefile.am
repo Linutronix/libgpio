@@ -7,7 +7,13 @@ DEBIAN_FILES = debian/changelog debian/compat debian/control \
 	debian/libgpio1.dirs debian/libgpio1.install \
 	debian/rules debian/source/format
 
-EXTRA_DIST = libgpio.pc.in $(DEBIAN_FILES)
+EXTRA_DIST = libgpio.pc.in libgpio.doxy.in $(DEBIAN_FILES)
+
+html-local:
+	doxygen libgpio.doxy
+
+mostlyclean-local:
+	-rm -rf doxydoc/
 
 DISTCLEANFILES = *~
 

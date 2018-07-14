@@ -14,6 +14,7 @@ config.*
 
 # directories
 autom4te.cache/
+doxydoc/
 m4/
 
 # specific rules
@@ -24,6 +25,7 @@ configure
 depcomp
 examples/testpin
 install-sh
+libgpio.doxy
 libgpio.pc
 libtool
 ltmain.sh

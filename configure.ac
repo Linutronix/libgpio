@@ -44,6 +44,7 @@ AC_FUNC_STRNLEN
 AC_CHECK_FUNCS([memset munmap])
 
 AC_CONFIG_FILES([Makefile
+		 libgpio.doxy
                  libgpio.pc
                  include/Makefile
                  cfg/Makefile
