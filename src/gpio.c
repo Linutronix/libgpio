@@ -32,6 +32,12 @@
 #define debug(...) ;
 #endif
 
+/**
+ * @mainpage
+ *
+ * This manual documents the libgpio C API.
+ */
+
 static int export_un_export (gpio_pin *pin, int export)
 {
 	char c[STR_LEN];
@@ -303,6 +309,18 @@ close_out:
 
 }
 
+/**
+ * @defgroup libgpio_public libgpio public available functions
+ * @ingroup libgpio
+ * @brief public functions
+ * @{
+ */
+
+/**
+ * set GPIO pin as output
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @returns 0 on success or errno on failure
+ */
 int gpio_out (gpio_pin *pin)
 {
 	int ret = 0;
@@ -320,6 +338,11 @@ int gpio_out (gpio_pin *pin)
 	return ret;
 }
 
+/**
+ * set GPIO pin as input
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @returns 0 on success or errno on failure
+ */
 int gpio_in (gpio_pin *pin)
 {
 	int ret = 0;
@@ -337,6 +360,12 @@ int gpio_in (gpio_pin *pin)
 	return ret;
 }
 
+/**
+ * set GPIO pin output value
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param value GPIO output value
+ * @returns 0 on success or errno on failure
+ */
 int gpio_set_value (gpio_pin *pin, gpio_value value)
 {
 	int ret = 0;
@@ -400,6 +429,12 @@ int gpio_set_value (gpio_pin *pin, gpio_value value)
 	return 0;
 }
 
+/**
+ * get GPIO pin status
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param value pointer to GPIO status value
+ * @returns 0 on success or errno on failure
+ */
 int gpio_get_value (gpio_pin *pin, gpio_value *value)
 {
 	int ret = 0;
@@ -471,6 +506,12 @@ int gpio_get_value (gpio_pin *pin, gpio_value *value)
 	return ret;
 }
 
+/**
+ * acquire a GPIO pin for use
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param no GPIO pin number
+ * @returns 0 on success or errno on failure
+ */
 int gpio_open (gpio_pin *pin, unsigned int no)
 {
 	int ret = 0;
@@ -499,6 +540,13 @@ int gpio_open (gpio_pin *pin, unsigned int no)
 	return ret;
 }
 
+/**
+ * acquire a GPIO pin for use and set pin direction
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param no GPIO pin number
+ * @param dir GPIO pin direction
+ * @returns 0 on success or errno on failure
+ */
 int gpio_open_dir (gpio_pin *pin, unsigned int no, gpio_direction dir)
 {
 	int ret = 0;
@@ -529,6 +577,11 @@ int gpio_open_dir (gpio_pin *pin, unsigned int no, gpio_direction dir)
 	return ret;
 }
 
+/**
+ * release a GPIO pin after use
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @returns 0 on success or errno on failure
+ */
 int gpio_close (gpio_pin *pin)
 {
 	int ret = 0;
@@ -549,6 +602,12 @@ int gpio_close (gpio_pin *pin)
 	return ret;
 }
 
+/**
+ * enable GPIO pin interrupt notification
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param m GPIO interrupt mode
+ * @returns 0 on success or errno on failure
+ */
 int gpio_enable_irq (gpio_pin *pin, gpio_irq_mode m)
 {
 	debug ("%s: %d\n", __func__, pin->no);
@@ -566,6 +625,11 @@ int gpio_enable_irq (gpio_pin *pin, gpio_irq_mode m)
 	return set_irq (pin, m);
 }
 
+/**
+ * get GPIO pin interrupt notification file descriptor
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @returns fd on success or negative errno value on failure
+ */
 int gpio_get_fd (gpio_pin *pin)
 {
 	if (!pin)
@@ -577,6 +641,13 @@ int gpio_get_fd (gpio_pin *pin)
 	return pin->fd;
 }
 
+/**
+ * wait for GPIO pin interrupt with timeout
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param value GPIO status value
+ * @param timeout_ms timeout value in milliseconds
+ * @returns fd on success or negative errno value on failure
+ */
 int gpio_irq_timed_wait (gpio_pin *pin, gpio_value *value, int timeout_ms)
 {
 	int ret = 0;
@@ -620,7 +691,15 @@ int gpio_irq_timed_wait (gpio_pin *pin, gpio_value *value, int timeout_ms)
 	return gpio_get_value (pin, value);
 }
 
+/**
+ * wait for GPIO pin interrupt
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param value GPIO status value
+ * @returns fd on success or negative errno value on failure
+ */
 int gpio_irq_wait (gpio_pin *pin, gpio_value *value)
 {
 	return gpio_irq_timed_wait (pin, value, -1);
 }
+
+/** @} */

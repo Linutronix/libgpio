@@ -29,6 +29,10 @@ static int init_cfg (void)
 	return ret;
 }
 
+/**
+ * @ingroup libgpio_public
+ * release all internal structures of libgpio
+ */
 void gpio_destroy (void)
 {
 	config_destroy (&cfg);
@@ -51,6 +55,13 @@ static int get_pin (const char *name)
 	return (int) no;
 }
 
+/**
+ * @ingroup libgpio_public
+ * acquire a GPIO pin by name for use
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param name GPIO pin name
+ * @returns 0 on success or errno on failure
+ */
 int gpio_open_by_name (gpio_pin *pin, const char *name)
 {
 	int ret = get_pin (name);
@@ -61,6 +72,14 @@ int gpio_open_by_name (gpio_pin *pin, const char *name)
 	return ret;
 }
 
+/**
+ * @ingroup libgpio_public
+ * acquire a GPIO pin by name for use and set pin direction
+ * @param pin GPIO pointer to GPIO pin info struct
+ * @param name GPIO pin name
+ * @param dir GPIO pin direction
+ * @returns 0 on success or errno on failure
+ */
 int gpio_open_by_name_dir (gpio_pin *pin, const char *name, gpio_direction dir)
 {
 	int ret = get_pin (name);
