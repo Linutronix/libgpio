@@ -10,10 +10,11 @@ Section: libdevel
 Architecture: any
 Depends: libgpio1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}, libconfig-dev
 Description: development headers for libgpio
- libgpio is used to control gpio pins that can be exported via sysfs
+ libgpio is used to control gpio pins that can be exported via sysfs.
+ (Development files)
 
 Package: libgpio1
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: GPIO helper library
- libgpio is used to control gpio pins that can be exported via sysfs
+ libgpio is used to control gpio pins that can be exported via sysfs.
