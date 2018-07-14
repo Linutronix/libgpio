@@ -18,6 +18,7 @@ doxydoc/
 m4/
 
 # specific rules
+ChangeLog
 INSTALL
 aclocal.m4
 compile

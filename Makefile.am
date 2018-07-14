@@ -7,7 +7,11 @@ DEBIAN_FILES = debian/changelog debian/compat debian/control \
 	debian/libgpio1.dirs debian/libgpio1.install \
 	debian/rules debian/source/format
 
-EXTRA_DIST = libgpio.pc.in libgpio.doxy.in $(DEBIAN_FILES)
+EXTRA_DIST = libgpio.pc.in libgpio.doxy.in tools/ChangeLog-from-git \
+	$(DEBIAN_FILES)
+
+dist-hook:
+	$(top_srcdir)/tools/ChangeLog-from-git $(top_srcdir)
 
 html-local:
 	doxygen libgpio.doxy
@@ -17,6 +21,6 @@ mostlyclean-local:
 
 DISTCLEANFILES = *~
 
-MAINTAINERCLEANFILES = INSTALL Makefile.in aclocal.m4 cfg/Makefile.in \
-	compile config.guess config.h.in config.sub configure depcomp \
-	install-sh ltmain.sh m4/* missing
+MAINTAINERCLEANFILES = ChangeLog INSTALL Makefile.in aclocal.m4 \
+	cfg/Makefile.in compile config.guess config.h.in config.sub \
+	configure depcomp install-sh ltmain.sh m4/* missing

@@ -1,2 +1,4 @@
 #!/bin/bash
-autoreconf -sif
+mkdir -p m4 && \
+    touch ChangeLog && \
+    autoreconf -sif
