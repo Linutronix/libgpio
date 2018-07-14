@@ -11,3 +11,72 @@ build
 also debian packages can be built:
 ./autogen.sh
 dpkg-buildpackage
+
+libgpio licensing rules
+^^^^^^^^^^^^^^^^^^^^^^^
+libgpio is provided under the terms of the GNU Lesser General Public
+License version 2.1 or later (LGPL-2.1-or-later), as provided in COPYING.
+
+The libgpio examples are provided under the terms of the GNU General Public
+License version 2.0 or later (GPL-2.0-or-later), as provided in COPYING.gpl.
+
+This documentation file provides a description of how each source file
+should be annotated to make its license clear and unambiguous.
+It doesn't replace the libgpio license.
+
+The common way of expressing the license of a source file is to add the
+matching boilerplate text into the top comment of the file.  Due to
+formatting, typos etc. these "boilerplates" are hard to validate for
+tools which are used in the context of license compliance.
+
+An alternative to boilerplate text is the use of Software Package Data
+Exchange (SPDX) license identifiers in each source file.  SPDX license
+identifiers are machine parsable and precise shorthands for the license
+under which the content of the file is contributed.  SPDX license
+identifiers are managed by the SPDX Workgroup at the Linux Foundation and
+have been agreed on by partners throughout the industry, tool vendors, and
+legal teams.  For further information see https://spdx.org/
+
+libgpio requires the precise SPDX identifier in all source files.
+The valid identifiers used in libgpio are explained in the section
+`License identifiers`_ and have been retrieved from the official SPDX
+license list at https://spdx.org/licenses/ along with the license texts.
+
+License identifier syntax
+-------------------------
+
+1. Placement:
+
+   The SPDX license identifier in kernel files shall be added at the first
+   possible line in a file which can contain a comment.  For the majority
+   or files this is the first line, except for scripts which require the
+   '#!PATH_TO_INTERPRETER' in the first line.  For those scripts the SPDX
+   identifier goes into the second line.
+
+2. Style:
+
+   The SPDX license identifier is added in form of a comment.  The comment
+   style depends on the file type::
+
+	C source: // SPDX-License-Identifier: <SPDX License Expression>
+	C header: /* SPDX-License-Identifier: <SPDX License Expression> */
+	scripts:  # SPDX-License-Identifier: <SPDX License Expression>
+
+3. Syntax:
+
+   A <SPDX License Expression> is either an SPDX short form license
+   identifier found on the SPDX License List.
+
+   License identifiers for licenses like [L]GPL with the 'or later' option
+   are constructed by using a "-or-later" for indicating the 'or later'
+   option.::
+
+      // SPDX-License-Identifier: GPL-2.0-or-later
+      // SPDX-License-Identifier: LGPL-2.1-or-later
+
+All SPDX license identifiers and exceptions must have a corresponding file,
+like COPYING, COPYING.gpl, etc.
+This is required to allow tool verification and to have the licenses ready
+to read and extract right from the source, which is recommended by various
+FOSS organizations, e.g. the `FSFE REUSE initiative
+<https://reuse.software/>`_.

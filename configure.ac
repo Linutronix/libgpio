@@ -1,4 +1,9 @@
-#                                               -*- Autoconf -*-
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# -*- Autoconf -*-
+#
+# Copyright (C) 2013 Linutronix GmbH
+# Author: Manuel Traut <manut@linutronix.de> 
+#
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.67])

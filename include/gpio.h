@@ -1,8 +1,7 @@
-/* libgpio
- *
- * Copyright 2012 Manuel Traut <manut@linutronix.de>
- *
- * LGPL licensed
+// SPDX-License-Identifier: LGPL-2.1-or-later
+/*
+ * Copyright (C) 2013 Linutronix GmbH
+ * Author: Manuel Traut <manut@linutronix.de>
  */
 
 #ifndef _LIB_GPIO_H_

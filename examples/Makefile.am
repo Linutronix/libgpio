@@ -1,3 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Copyright (C) 2013 Linutronix GmbH
+# Author: Manuel Traut <manut@linutronix.de>
+
 bin_PROGRAMS = testpin
 testpin_SOURCES = testpin.c
 testpin_CFLAGS = -Wall -Wextra -Werror \

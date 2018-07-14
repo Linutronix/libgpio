@@ -1,3 +1,8 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+#
+# Copyright (C) 2013 Linutronix GmbH
+# Author: Manuel Traut <manut@linutronix.de>
+
 lib_LTLIBRARIES = libgpio.la
 # 1) If the library source code has changed at all since the last update, then
 #    increment revision ("c:r:a" becomes "c:r+1:a").
