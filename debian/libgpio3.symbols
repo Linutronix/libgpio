@@ -1,0 +1,15 @@
+libgpio-3.0.0.so.3 libgpio3 #MINVER#
+ gpio_close@Base 3.0.0
+ gpio_destroy@Base 3.0.0
+ gpio_enable_irq@Base 3.0.0
+ gpio_get_fd@Base 3.0.0
+ gpio_get_value@Base 3.0.0
+ gpio_in@Base 3.0.0
+ gpio_irq_timed_wait@Base 3.0.0
+ gpio_irq_wait@Base 3.0.0
+ gpio_open@Base 3.0.0
+ gpio_open_by_name@Base 3.0.0
+ gpio_open_by_name_dir@Base 3.0.0
+ gpio_open_dir@Base 3.0.0
+ gpio_out@Base 3.0.0
+ gpio_set_value@Base 3.0.0
