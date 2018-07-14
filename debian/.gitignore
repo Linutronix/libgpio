@@ -1,0 +1,9 @@
+# directories
+libgpio1/
+libgpio-dev/
+tmp/
+
+# specific rules
+autoreconf.after
+autoreconf.before
+files
