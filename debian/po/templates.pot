@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgpio\n"
 "Report-Msgid-Bugs-To: libgpio@packages.debian.org\n"
-"POT-Creation-Date: 2017-08-09 10:39+0200\n"
+"POT-Creation-Date: 2018-07-15 02:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 
 #. Type: Select
 #. Description
-#: ../libgpio1.templates:1001
+#: ../libgpio3.templates:1001
 msgid "GPIO Mapping:"
 msgstr ""
 
 #. Type: Select
 #. Description
-#: ../libgpio1.templates:1001
+#: ../libgpio3.templates:1001
 msgid "Please choose the mapping according to your system."
 msgstr ""
