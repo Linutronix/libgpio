@@ -4,6 +4,8 @@ Maintainer: Manuel Traut <manut@linutronix.de>
 Build-Depends: debhelper (>= 9.0.0), autotools-dev, libconfig-dev, git, dh-autoreconf, po-debconf
 Standards-Version: 4.1.5
 Homepage: https://github.com/Linutronix/libgpio
+Vcs-Git: https://github.com/Linutronix/libgpio.git
+Vcs-browser: https://github.com/Linutronix/libgpio
 Section: libs
 
 Package: libgpio-dev
