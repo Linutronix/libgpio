@@ -1,4 +1,4 @@
-libgpio-3.0.0.so.3 libgpio3 #MINVER#
+libgpio.so.3 libgpio3 #MINVER#
  gpio_close@Base 3.0.0
  gpio_destroy@Base 3.0.0
  gpio_enable_irq@Base 3.0.0
