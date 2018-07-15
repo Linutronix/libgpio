@@ -367,14 +367,14 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = src include cfg examples
+SUBDIRS = src include cfg examples tests
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libgpio.pc
 EXTRA_DIST = COPYING.GPL libgpio.pc.in libgpio.doxy.in tools/ChangeLog-from-git
 DISTCLEANFILES = *~
 MAINTAINERCLEANFILES = ChangeLog INSTALL Makefile.in aclocal.m4 \
 	cfg/Makefile.in compile config.guess config.h.in config.sub \
-	configure depcomp install-sh ltmain.sh m4/* missing
+	configure depcomp install-sh ltmain.sh m4/* missing test-driver
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive

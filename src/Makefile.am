@@ -12,7 +12,7 @@ lib_LTLIBRARIES = libgpio.la
 #    then increment age.
 # 4) If any interfaces have been removed or changed since the last public
 #    release, then set age to 0.
-libgpio_la_LDFLAGS = -version-info 3:0:0 -lconfig
+libgpio_la_LDFLAGS = -version-info 4:0:1 -lconfig
 libgpio_la_SOURCES = gpio.c config.c
 libgpio_la_CFLAGS = -Wall -Wextra -Werror -I$(top_srcdir)/include \
 	-DCFG_FILE=\"$(sysconfdir)/gpio.cfg\"
