@@ -1,0 +1,2 @@
+version=3
+opts=pgpmode=none https://github.com/Linutronix/libgpio/releases
