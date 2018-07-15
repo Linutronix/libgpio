@@ -78,6 +78,7 @@ int gpio_open_dir (gpio_pin *pin, unsigned int no, gpio_direction dir);
 int gpio_open_by_name_dir (gpio_pin *pin, const char *name, gpio_direction dir);
 
 int gpio_close (gpio_pin *pin);
+int gpio_init (char *cfgname);
 void gpio_destroy (void);
 
 int gpio_out (gpio_pin *pin);

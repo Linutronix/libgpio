@@ -16,23 +16,41 @@ static config_t cfg = {
 	.root = NULL,
 };
 
-static int init_cfg (void)
+static int init_cfg (char *cfgname)
 {
 	int ret = CONFIG_TRUE;
 
-	if (cfg.root)
-		return ret;
-
-	config_init (&cfg);
-
-	ret = config_read_file (&cfg, CFG_FILE);
-	if (ret == CONFIG_FALSE) {
-		fprintf (stderr, "setup libconfig failed: %s\n", config_error_text (&cfg));
-		fprintf (stderr, "probably: %s doesn't exist\n", CFG_FILE);
-		config_destroy (&cfg);
+	if (cfg.root) {
+		if (cfgname) {
+			fprintf (stderr, "libconfig already configured\n");
+			ret = CONFIG_FALSE;
+		}
+		goto out;
 	}
 
+	config_init (&cfg);
+	if (!cfgname)
+		cfgname = CFG_FILE;
+
+	ret = config_read_file (&cfg, cfgname);
+	if (ret == CONFIG_FALSE) {
+		fprintf (stderr, "setup libconfig failed: %s\n", config_error_text (&cfg));
+		fprintf (stderr, "probably: %s doesn't exist\n", cfgname);
+		config_destroy (&cfg);
+	}
+out:
 	return ret;
+}
+
+/**
+ * @ingroup libgpio_public
+ * optional init of all internal structures of libgpio with given config
+ * @param cfgname path to libgpio configuration file or NULL for default
+ * @return 0 on success or -EINVAL on failure
+ */
+int gpio_init (char *cfgname)
+{
+	return (init_cfg (cfgname) == CONFIG_TRUE) ? 0 : -EINVAL;
 }
 
 /**
@@ -47,7 +65,7 @@ void gpio_destroy (void)
 static int get_pin (const char *name)
 {
 	int no;
-	int ret = init_cfg ();
+	int ret = init_cfg (NULL);
 
 	if (ret == CONFIG_FALSE)
 		return -EINVAL;
