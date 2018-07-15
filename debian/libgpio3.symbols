@@ -5,6 +5,7 @@ libgpio.so.3 libgpio3 #MINVER#
  gpio_get_fd@Base 3.0.0
  gpio_get_value@Base 3.0.0
  gpio_in@Base 3.0.0
+ gpio_init@Base 3.0.1
  gpio_irq_timed_wait@Base 3.0.0
  gpio_irq_wait@Base 3.0.0
  gpio_open@Base 3.0.0
