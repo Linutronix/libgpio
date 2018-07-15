@@ -1,0 +1,30 @@
+# German translations for libgpio package.
+# Copyright (C) 2018 THE libgpio'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the libgpio package.
+# Benedikt Spranger <b.spranger@linutronix.de>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgpio\n"
+"Report-Msgid-Bugs-To: libgpio@packages.debian.org\n"
+"POT-Creation-Date: 2018-07-15 02:37+0200\n"
+"PO-Revision-Date: 2018-07-15 04:47+0200\n"
+"Last-Translator: Benedikt Spranger <b.spranger@linutronix.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Type: Select
+#. Description
+#: ../libgpio3.templates:1001
+msgid "GPIO Mapping:"
+msgstr "GPIO Zuordnung:"
+
+#. Type: Select
+#. Description
+#: ../libgpio3.templates:1001
+msgid "Please choose the mapping according to your system."
+msgstr "Wählen Sie bitte eine Ihrem System entsprechende Zuordnungsdatei."
