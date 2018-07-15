@@ -3,7 +3,7 @@
 # Copyright (C) 2013 Linutronix GmbH
 # Author: Manuel Traut <manut@linutronix.de>
 
-SUBDIRS = src include cfg examples
+SUBDIRS = src include cfg examples tests
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libgpio.pc
 
@@ -22,4 +22,4 @@ DISTCLEANFILES = *~
 
 MAINTAINERCLEANFILES = ChangeLog INSTALL Makefile.in aclocal.m4 \
 	cfg/Makefile.in compile config.guess config.h.in config.sub \
-	configure depcomp install-sh ltmain.sh m4/* missing
+	configure depcomp install-sh ltmain.sh m4/* missing test-driver
