@@ -1,18 +1,19 @@
 Source: libgpio
-Priority: extra
-Maintainer: Manuel Traut <manut@linutronix.de>
-Build-Depends: debhelper (>= 9.0.0), autotools-dev, libconfig-dev, git, dh-autoreconf, po-debconf
+Priority: optional
+Maintainer: Linutronix GmbH <info@linutronix.de>
+Uploaders: Benedikt Spranger <b.spranger@linutronix.de>
+Build-Depends: debhelper (>= 10), libconfig-dev, git, po-debconf
 Standards-Version: 4.0.0
 Section: libs
 
 Package: libgpio-dev
 Section: libdevel
 Architecture: any
-Depends: libgpio1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}, libconfig-dev
+Depends: libgpio3 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}, libconfig-dev
 Description: development headers for libgpio
  libgpio is used to control gpio pins that can be exported via sysfs
 
-Package: libgpio1
+Package: libgpio3
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}

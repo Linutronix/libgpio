@@ -1,3 +1,10 @@
+libgpio (3.0.1) unstable; urgency=medium
+
+  * Rework debianization
+  * Add missing header
+
+ -- Benedikt Spranger <b.spranger@linutronix.de>  Sun, 10 May 2026 12:53:37 +0200
+
 libgpio (3.0.0) unstable; urgency=low
 
   * add status field to gpio_pin handle to abort on use of invalid handles

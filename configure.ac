@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.67])
-AC_INIT([libgpio], [3.0.0], [manut@linutronix.de])
+AC_INIT([libgpio], [3.0.1], [info@linutronix.de])
 AM_INIT_AUTOMAKE([silent-rules color-tests])
 AC_USE_SYSTEM_EXTENSIONS
 AC_GNU_SOURCE

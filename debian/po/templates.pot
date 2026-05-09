@@ -19,12 +19,12 @@ msgstr ""
 
 #. Type: Select
 #. Description
-#: ../libgpio1.templates:1001
+#: ../libgpio3.templates:1001
 msgid "GPIO Mapping:"
 msgstr ""
 
 #. Type: Select
 #. Description
-#: ../libgpio1.templates:1001
+#: ../libgpio3.templates:1001
 msgid "Please choose the mapping according to your system."
 msgstr ""

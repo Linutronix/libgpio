@@ -20,7 +20,7 @@ Makefile
 stamp-h1
 debian/files
 debian/libgpio-dev/
-debian/libgpio1
+debian/libgpio3
 debian/tmp
 examples/testpin
 libgpio.pc
