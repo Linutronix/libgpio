@@ -1,13 +1,16 @@
-libgpio
-=======
+# libgpio
 
-libgpio can be used to ease the access of GPIOs via Linux / sysfs.
+libgpio can be used to ease the access of GPIOs on Linux systems using
+the old deprecaded sysfs method.
 
-build
-^^^^^
-./autogen.sh
-./configure && make && make install
+Please consider using https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git
+
+## build
+
+    ./autogen.sh
+    ./configure && make && make install
 
 also debian packages can be built:
-./autogen.sh
-dpkg-buildpackage
+
+    ./autogen.sh
+    dpkg-buildpackage
